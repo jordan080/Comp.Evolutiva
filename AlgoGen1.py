@@ -173,7 +173,6 @@ if __name__ == '__main__':
       
   #loop de intereacoes
   while(geracoes > 0):
-    print(f'Geração {71 - geracoes}: ', end='')
     printRota(melhorRota)
     rotasRanqueadas = ranqueamentoRotas(populacaoInicial)
     
