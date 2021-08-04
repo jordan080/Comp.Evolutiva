@@ -79,7 +79,6 @@ def gerarPopulacaoInicial(tamanhoPopulacao):
 if __name__ == '__main__':
   tamanhoPopulacao = 20
   geracoes = 5000
-
   equation = [(3,20), (8,19), (7,18), (3,17), (12,16), (9,15), (10,14), (8,13), (12,12), (1,11), (3,10), (8,9), (4,8), (9,7), (7,6), (9,5), (9,4), (9,3), (11,2), (12,1)]
 
   populacao = gerarPopulacaoInicial(tamanhoPopulacao)
@@ -90,12 +89,13 @@ if __name__ == '__main__':
     for i in range(0, len(populacao)):
       pai, mae = selecao(populacao)
       filhoCruzamento = Cruzamento(pai, mae)
-      filhoCruzamento = Mutacao(filhoCruzamento)
       populacaoFilhos.append(filhoCruzamento)
+    populacaoFilhos = mutarPopulacao(populacaoFilhos, 0.05)
     populacao = populacaoFilhos
     fitness = Fitness(populacao, equation)
     geracoes -= 1
 
+  #printa as raizes da equação e depois o resultado ao substituirem nela.
   print(populacao[0], end = "\n")
   print(round(fitness[0]), end = "\n")
   
