@@ -4,15 +4,14 @@ class Perceptron:
 
 	def __init__(self, entradas, desejado, taxa_aprendizado=0.1, epocas=1000):
 
-		self.entradas = entradas # todas as entradas
-		self.desejado = desejado # saída desejada de cada entrada
+		self.entradas = entradas # matriz com as colunas de cada um dos átomos
+		self.desejado = desejado # valores desejados da ultima coluna, na qual contém a expressão
 		self.taxa_aprendizado = taxa_aprendizado # taxa de aprendizado (entre 0 e 1)
 		self.epocas = epocas # número de épocas
 		self.num_entradas = len(entradas) # quantidade de entradas
 		self.num_elementos = len(entradas[0]) # quantidade de elementos por entrada
 		self.pesos = [] # vetor de pesos
 
-	# função para treinar a rede
 	def treinar(self):
 
 		# inicia o vetor de pesos com valores aleatórios
@@ -54,9 +53,6 @@ class Perceptron:
 			if num_epocas > self.epocas or not erro:
 				break
 
-	# função utilizada para testar a rede
-	# recebe uma elemento a ser classificada e os nomes das classes
-	# utiliza a função sinal, se é -1 então é classe1, senão é classe2
 	def testar(self, testes):
 
 		resultado = []
@@ -89,10 +85,7 @@ class Perceptron:
 		for i in range(self.num_entradas):
 			print("| {} | {} | {} |         {}          | ".format(res[i][0], res[i][1], res[i][2], res[i][4]))
 		
-
-
-
-
+#matriz com as colunas de cada um dos átomos
 entradas = [[0, 0, 0, 1],
 			[0, 0, 1, 1],
 			[0, 1, 0, 1],
@@ -102,8 +95,8 @@ entradas = [[0, 0, 0, 1],
 			[1, 1, 0, 1],
 			[1, 1, 1, 1]]
 
-# saídas desejadas de cada elemento
-desejado = [0, 0, 0, 0, 1, 1, 0, 1]
+# valores desejados da ultima coluna, na qual contém a expressão
+desejado = [0, 0, 0, 0, 1, 0, 1, 1]
 
 # conjunto de entradas de testes
 testes = copy.deepcopy(entradas)
@@ -114,6 +107,8 @@ rede = Perceptron(entradas = entradas, desejado = desejado, taxa_aprendizado = 0
 # treina a rede
 rede.treinar()
 
+# testa a rede e gera a ultima coluna da tabela
 resultado = rede.testar(testes)
 
+# gera a tabela verdade
 rede.gerar_tabela(testes, resultado)
